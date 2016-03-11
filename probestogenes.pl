@@ -24,7 +24,7 @@ my %probes_to_rohgenes = ();
 
 # Open rohgenes stream 
 
-open my $rohgenes, "<", "sorted_rohgenes_snp25_het0_len500.txt" or die $!;
+open my $rohgenes, "<", "../../data/expression/sorted_rohgenes_snp25_het0_len500.txt" or die $!;
 #print "Opened rohgenes stream","\n";
 
 # Skip header line 
@@ -35,7 +35,7 @@ open my $rohgenes, "<", "sorted_rohgenes_snp25_het0_len500.txt" or die $!;
 # For every line in the rohgenes stream:
 while( my $rohgenes_line = <$rohgenes> ) {
 
-	print "$.", ",";
+	print "$.", "\n";
 
 	# Split line and store variables
 	my @rohgenes_line = split /\s+/, $rohgenes_line;
@@ -55,7 +55,7 @@ while( my $rohgenes_line = <$rohgenes> ) {
 	# Fill up probe to haplotype hash  
 	while( my $annotation_line = <$annotation> ) {
 
-		print "$.","\n";
+		#print "$.","\n";
 
 		# Skip header line 
 		next if $. < 2;
@@ -69,20 +69,20 @@ while( my $rohgenes_line = <$rohgenes> ) {
 		
 		# Keep looking if annotation chromosome number is less or equal to roh chromosome number
 		#print "Annotation chromosome is ", $annotation_line[3], " Rohgenes chromosome is ", $rohgenes_line[3], "\n";
-		if( $annotation_line[3] <= $rohgenes_line[3] ) {
+		#if( $annotation_line[3] <= $rohgenes_line[3] ) {
 			#print "Entered first if statement", "\n";
 			# If roh file's chromosome number, start and end match those of annotation file's, then add (probenumber : rohgenes_data_ref) key:value pair to hash
 			
 			if ( ($rohgenes_line[3] == $annotation_line[3]) && ($rohgenes_line[4] == $annotation_line[4]) && ($rohgenes_line[5] == $rohgenes_line[5]) ) {
+				print $rohgenes_line,"\n";
 				%probes_to_rohgenes = {
-					print $rohgenes_line,"\n";
 					$annotation_line[1] => $rohgenes_line_ref # map probe number to reference to rohgenes_line
 				};
 			}
-		} else {
+		#} else {
 			#print "No match.","\n";
-			last;
-		}
+			#last;
+		#}
 	}
 }
 
