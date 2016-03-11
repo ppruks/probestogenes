@@ -94,8 +94,9 @@
 	1) set parameters for number of SNPs and length of a commonROH in bps 
 
 ## Find genes in commonROHs based on annotation file 
-	1) sort ANNOTATION FILE and COMMON ROH file according to CHR, BP1 (CHRSTART) and BP2 (CHREND)
-	2) get all genes in the annotation file within +- (specify) kb of every commonROH 
+	1) remove autosomal and unplaced chromosomes from file 
+	2) sort ANNOTATION FILE and COMMON ROH file according to CHR, BP1 (CHRSTART) and BP2 (CHREND)
+	3) get all genes in the annotation file within +- (specify) kb of every commonROH 
 
 	ANNOTATION FILE format (contains header line):
 
